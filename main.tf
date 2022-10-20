@@ -20,7 +20,7 @@ data "google_project" "user_project" {
 locals {
 
   project = data.google_project.user_project
-  
+
 
   region = var.default_region
 
@@ -65,7 +65,7 @@ resource "google_project_service" "enabled_services" {
   service                    = each.value
   disable_dependent_services = true
   disable_on_destroy         = true
-  
+
 }
 
 data "google_compute_default_service_account" "default" {

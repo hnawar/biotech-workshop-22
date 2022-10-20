@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-variable "billing_account_id" {
-  description = "Billing Account associated to the GCP Resources"
-  type        = string
-}
+
 variable "create_network" {
   description = "If the module has to be deployed in an existing network, set this variable to false."
   type        = bool

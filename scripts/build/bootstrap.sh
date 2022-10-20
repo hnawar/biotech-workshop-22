@@ -27,14 +27,13 @@ if [[ -f /etc/startup_was_launched ]]; then exit 0; fi
 # Install Packages needed
 apt-get update
 apt-get install -y git wget openjdk-11-jdk
-#No longer needed as Batch is now supported in latest release
-#export NXF_EDGE=1
+
+
 wget -qO- https://get.nextflow.io | bash
 mkdir /usr/local/bin/nextflow
 mv ./nextflow /usr/local/bin/nextflow
 
 echo "export PATH=/usr/local/bin/nextflow:$PATH" >> /etc/profile
-echo "export NXF_EDGE=1" >> /etc/profile
 
 # Copy Config and Service files from Bucket
 gsutil cp ${BUCKET_URL}/provisioning/nextflow.config /etc/nextflow.config
