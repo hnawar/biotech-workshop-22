@@ -25,9 +25,6 @@ resource "google_project_organization_policy" "external_ip_policy" {
       all = true
     }
   }
-  depends_on = [
-    module.project_radlab_gen_nextflow
-  ]
 }
 
 resource "google_project_organization_policy" "shielded_vm_policy" {
@@ -38,9 +35,6 @@ resource "google_project_organization_policy" "shielded_vm_policy" {
   boolean_policy {
     enforced = false
   }
-  depends_on = [
-    module.project_radlab_gen_nextflow
-  ]
 }
 
 resource "google_project_organization_policy" "trustedimage_project_policy" {
@@ -53,13 +47,9 @@ resource "google_project_organization_policy" "trustedimage_project_policy" {
       all = true
     }
   }
-
-  depends_on = [
-    module.project_radlab_gen_nextflow
-  ]
 }
 
-resource "time_sleep" "wait_120_seconds" {
+resource "time_sleep" "wait_60_seconds" {
   count = var.set_trustedimage_project_policy || var.set_shielded_vm_policy || var.set_restrict_vpc_peering_policy || var.set_external_ip_policy ? 1 : 0
 
   depends_on = [
@@ -69,5 +59,5 @@ resource "time_sleep" "wait_120_seconds" {
 
   ]
 
-  create_duration = "120s"
+  create_duration = "60s"
 }

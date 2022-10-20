@@ -18,7 +18,7 @@ data "google_project" "user_project" {
 
 
 locals {
-  random_id = var.random_id != null ? var.random_id : random_id.default.hex
+
   project = data.google_project.user_project
   
 
@@ -58,24 +58,6 @@ resource "random_id" "default" {
 
 
 
-module "project_radlab_gen_nextflow" {
-  count   = var.create_project ? 1 : 0
-  source  = "terraform-google-modules/project-factory/google"
-  version = "~> 13.0"
-
-  name                    = format("%s-%s", var.project_name, local.random_id)
-  random_project_id       = false
-  folder_id               = var.folder_id
-  billing_account         = var.billing_account_id
-  org_id                  = var.organization_id
-  default_service_account = "keep"
-  labels = {
-    vpc-network = var.network_name
-  }
-
-  activate_apis = []
-}
-
 
 
 resource "google_project_service" "enabled_services" {
@@ -84,10 +66,7 @@ resource "google_project_service" "enabled_services" {
   service                    = each.value
   disable_dependent_services = true
   disable_on_destroy         = true
-
-  depends_on = [
-    module.project_radlab_gen_nextflow
-  ]
+  
 }
 
 data "google_compute_default_service_account" "default" {
