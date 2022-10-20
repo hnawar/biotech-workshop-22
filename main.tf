@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 data "google_project" "user_project" {
 }
 
@@ -21,6 +22,15 @@ locals {
 
   project = data.google_project.user_project
   
+=======
+
+locals {
+  random_id = var.random_id != null ? var.random_id : random_id.default.hex
+  project = (var.create_project
+    ? try(module.project_radlab_gen_nextflow.0, null)
+    : try(data.google_project.existing_project.0, null)
+  )
+>>>>>>> d48b980cf0e552298a9303559f65927a374156f6
 
   region = var.default_region
 
@@ -55,7 +65,6 @@ resource "random_id" "default" {
 ####################
 # nextflow Project #
 ####################
-
 
 
 
