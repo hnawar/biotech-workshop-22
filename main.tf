@@ -110,7 +110,8 @@ resource "google_storage_bucket_object" "config" {
     NEXTFLOW_SUBNET          = var.subnet_name
     NEXTFLOW_SERVICE_ACCOUNT = module.nextflow_service_account.email,
     NEXTFLOW_LOCATION        = var.nextflow_API_location,
-    NEXTFLOW_ZONE            = var.nextflow_zone
+    NEXTFLOW_ZONE            = var.nextflow_zone,
+    BUCKET_URL = google_storage_bucket.nextflow_workflow_bucket.url
   })
 }
 
