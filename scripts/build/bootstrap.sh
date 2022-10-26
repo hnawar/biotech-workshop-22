@@ -26,7 +26,7 @@ if [[ -f /etc/startup_was_launched ]]; then exit 0; fi
 
 # Install Packages needed
 apt-get update
-apt-get install -y git wget openjdk-11-jdk
+apt-get install -y git wget openjdk-11-jdk graphviz
 
 
 wget -qO- https://get.nextflow.io | bash
